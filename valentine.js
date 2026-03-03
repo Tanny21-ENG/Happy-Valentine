@@ -1,15 +1,15 @@
-// Countdown to Valentine's Day
+// Countdown to the target date (02/11/26)
 function updateCountdown() {
-    const valentineDate = new Date('2025-02-14T00:00:00');
+    const targetDate = new Date('2026-11-02T00:00:00');
     const now = new Date();
-    const diff = valentineDate - now;
-    
+    const diff = targetDate - now;
+
     if (diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
+
         document.getElementById('days').textContent = days;
         document.getElementById('hours').textContent = hours;
         document.getElementById('minutes').textContent = minutes;
@@ -61,17 +61,17 @@ function closeVideoPopup() {
 }
 
 if (surpriseBtn) {
-    surpriseBtn.addEventListener('click', function() {
+    surpriseBtn.addEventListener('click', function () {
         if (surpriseMessage) {
             surpriseMessage.classList.remove('hidden');
             setTimeout(() => {
                 surpriseMessage.classList.add('show');
             }, 10);
         }
-        
+
         createHeartBurst();
         openVideoPopup();
-        
+
         this.textContent = 'ฉันรักเธอมาก ❤️';
         this.disabled = true;
         this.style.opacity = '0.8';
@@ -191,7 +191,7 @@ document.addEventListener('touchstart', function handleFirstTouch() {
     document.removeEventListener('touchstart', handleFirstTouch);
 });
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     startBackgroundMusic();
 });
 
@@ -199,7 +199,7 @@ window.addEventListener('load', function() {
 function createHeartBurst() {
     const colors = ['❤️', '💕', '💖', '💗', '💝'];
     const container = document.body;
-    
+
     for (let i = 0; i < 20; i++) {
         setTimeout(() => {
             const heart = document.createElement('div');
@@ -211,9 +211,9 @@ function createHeartBurst() {
             heart.style.pointerEvents = 'none';
             heart.style.zIndex = '9999';
             heart.style.animation = 'floatUp 3s ease-out forwards';
-            
+
             container.appendChild(heart);
-            
+
             // Remove heart after animation
             setTimeout(() => {
                 heart.remove();
@@ -224,7 +224,7 @@ function createHeartBurst() {
 
 // Add interactive hover effects to memory cards
 document.querySelectorAll('.memory-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
+    card.addEventListener('mouseenter', function () {
         // Create small floating heart
         const heart = document.createElement('div');
         heart.textContent = '💕';
@@ -233,13 +233,13 @@ document.querySelectorAll('.memory-card').forEach(card => {
         heart.style.fontSize = '20px';
         heart.style.animation = 'floatUp 2s ease-out forwards';
         heart.style.zIndex = '10';
-        
+
         const rect = this.getBoundingClientRect();
         heart.style.left = rect.left + rect.width / 2 + 'px';
         heart.style.top = rect.top + 'px';
-        
+
         document.body.appendChild(heart);
-        
+
         setTimeout(() => {
             heart.remove();
         }, 2000);
@@ -248,7 +248,7 @@ document.querySelectorAll('.memory-card').forEach(card => {
 
 // Add click interaction to reason items
 document.querySelectorAll('.reason-item').forEach((item, index) => {
-    item.addEventListener('click', function() {
+    item.addEventListener('click', function () {
         // Create ripple effect
         const ripple = document.createElement('div');
         ripple.style.position = 'absolute';
@@ -259,14 +259,14 @@ document.querySelectorAll('.reason-item').forEach((item, index) => {
         ripple.style.transform = 'translate(-50%, -50%)';
         ripple.style.pointerEvents = 'none';
         ripple.style.animation = 'ripple 0.6s ease-out';
-        
+
         const rect = this.getBoundingClientRect();
         ripple.style.left = event.clientX - rect.left + 'px';
         ripple.style.top = event.clientY - rect.top + 'px';
-        
+
         this.style.position = 'relative';
         this.appendChild(ripple);
-        
+
         setTimeout(() => {
             ripple.remove();
         }, 600);
@@ -299,9 +299,9 @@ function createRandomHeart() {
     heart.style.zIndex = '1';
     heart.style.opacity = '0.4';
     heart.style.animation = 'floatUp 10s linear forwards';
-    
+
     document.body.appendChild(heart);
-    
+
     setTimeout(() => {
         heart.remove();
     }, 10000);
@@ -311,7 +311,7 @@ function createRandomHeart() {
 setInterval(createRandomHeart, 3000);
 
 // Add keyboard interaction - Press 'L' for love
-document.addEventListener('keypress', function(event) {
+document.addEventListener('keypress', function (event) {
     if (event.key === 'l' || event.key === 'L') {
         const messages = [
             'ฉันรักเธอ ❤️',
@@ -320,7 +320,7 @@ document.addEventListener('keypress', function(event) {
             'ขอบคุณที่อยู่ข้างๆ ฉัน 💗',
             'เธอคือทุกสิ่ง 💝'
         ];
-        
+
         const message = messages[Math.floor(Math.random() * messages.length)];
         const popup = document.createElement('div');
         popup.textContent = message;
@@ -334,9 +334,9 @@ document.addEventListener('keypress', function(event) {
         popup.style.zIndex = '10000';
         popup.style.animation = 'fadeInOut 2s ease forwards';
         popup.style.textShadow = '2px 2px 4px rgba(0,0,0,0.2)';
-        
+
         document.body.appendChild(popup);
-        
+
         setTimeout(() => {
             popup.remove();
         }, 2000);
@@ -358,15 +358,15 @@ document.head.appendChild(fadeStyle);
 let touchStartX = 0;
 let touchStartY = 0;
 
-document.addEventListener('touchstart', function(e) {
+document.addEventListener('touchstart', function (e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
 });
 
-document.addEventListener('touchend', function(e) {
+document.addEventListener('touchend', function (e) {
     const touchEndX = e.changedTouches[0].clientX;
     const touchEndY = e.changedTouches[0].clientY;
-    
+
     // Swipe up to create hearts
     if (touchStartY - touchEndY > 50) {
         createHeartBurst();
@@ -374,14 +374,14 @@ document.addEventListener('touchend', function(e) {
 });
 
 // Page visibility change - create hearts when returning to tab
-document.addEventListener('visibilitychange', function() {
+document.addEventListener('visibilitychange', function () {
     if (!document.hidden) {
         createHeartBurst();
     }
 });
 
 // Initialize with a welcome animation
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     setTimeout(() => {
         createHeartBurst();
     }, 500);

@@ -37,10 +37,10 @@ function updateCountdown() {
 }
 
 // Show the starting date underneath the counter (in Thai locale)
-const startTextEl = document.getElementById('startDateText');
-if (startTextEl) {
-    startTextEl.textContent = 'เริ่มวันที่ ' + startDate.toLocaleDateString('th-TH');
-}
+// const startTextEl = document.getElementById('startDateText');
+// if (startTextEl) {
+//     startTextEl.textContent = 'เริ่มวันที่ ' + startDate.toLocaleDateString('th-TH');
+// }
 
 // Update countdown every second
 setInterval(updateCountdown, 1000);

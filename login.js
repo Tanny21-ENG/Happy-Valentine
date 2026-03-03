@@ -1,7 +1,9 @@
 // Password - คุณสามารถเปลี่ยนรหัสได้ที่นี่
+// รหัส PIN สำหรับเข้าสู่ระบบ
 const CORRECT_PASSWORD = '021125'; // รหัส 6 ตัวอักษร
 
 // DOM Elements
+// อ้างถึงองค์ประกอบบนหน้าเพื่อนำมาใช้งาน
 const loginForm = document.getElementById('loginForm');
 const hiddenPasswordInput = document.getElementById('password');
 const pinInputs = Array.from(document.querySelectorAll('.pin-input'));
@@ -10,36 +12,44 @@ const hintBtn = document.getElementById('hintBtn');
 const hintText = document.getElementById('hintText');
 
 // Maximum attempts
+// จำนวนครั้งสูงสุดที่ผู้ใช้สามารถลองได้
 let attempts = 0;
 const MAX_ATTEMPTS = 3;
 
 // Form submission
+// จัดการเหตุการณ์ส่งฟอร์มเมื่อผู้ใช้กดปุ่ม
 loginForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const enteredPassword = collectPin();
     hiddenPasswordInput.value = enteredPassword;
 
     // Check password
+    // ตรวจสอบรหัสที่กรอกว่าถูกหรือไม่
     if (enteredPassword === CORRECT_PASSWORD) {
         // Success animation
+        // เล่นเอฟเฟกต์เมื่อรหัสถูกต้อง
         createSuccessAnimation();
 
         // Redirect after animation
+        // เปลี่ยนหน้าหลังจากแสดงอนิเมชันสำเร็จ
         setTimeout(() => {
             window.location.href = 'valentine.html';
         }, 1500);
     } else {
         // Wrong password
+        // รหัสไม่ถูกต้อง
         attempts++;
         showError();
 
         // Shake animation
+        // ล่าสุดฟอร์มเพื่อบอกว่ากรอกรหัสผิด
         loginForm.style.animation = 'shake 0.5s';
         setTimeout(() => {
             loginForm.style.animation = '';
         }, 500);
 
         // Disable form after max attempts
+        // ปิดการกรอกฟอร์มเมื่อเกินจำนวนครั้ง
         if (attempts >= MAX_ATTEMPTS) {
             lockForm();
         }
@@ -47,6 +57,7 @@ loginForm.addEventListener('submit', function (e) {
 });
 
 // Show error message
+// แสดงข้อความแจ้งเตือนเมื่อรหัสผิด
 function showError() {
     errorMessage.classList.remove('hidden');
     setTimeout(() => {
@@ -63,6 +74,7 @@ function showError() {
 }
 
 // Lock form after max attempts
+// ล็อกฟอร์มเมื่อพยายามเกินจำนวน
 function lockForm() {
     const loginBtn = document.querySelector('.login-btn');
     loginBtn.disabled = true;
@@ -82,6 +94,7 @@ function lockForm() {
 }
 
 // Unlock form
+// ปลดล็อกฟอร์มหากครบเวลารอ
 function unlockForm() {
     const loginBtn = document.querySelector('.login-btn');
     loginBtn.disabled = false;
@@ -103,6 +116,7 @@ function unlockForm() {
 }
 
 // Hint functionality
+// ปุ่มคำใบ้กดแล้วแสดงข้อความ<br>Hint
 hintBtn.addEventListener('click', function () {
     hintText.classList.remove('hidden');
     setTimeout(() => {

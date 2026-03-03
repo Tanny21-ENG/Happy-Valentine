@@ -1,8 +1,18 @@
-// Countdown to the target date (02/11/26)
+// Countdown to the target date (02/11/26), starting from when the page is first opened
+// นับถอยหลังถึงวันที่เป้าหมาย (02/11/26) โดยเริ่มนับเมื่อเปิดหน้า
+const startDate = new Date(); // record today's date when script loads
+// บันทึกวันที่เริ่มต้นเมื่อสคริปต์โหลด
+
 function updateCountdown() {
     const targetDate = new Date('2026-11-02T00:00:00');
     const now = new Date();
-    const diff = targetDate - now;
+    let diff = targetDate - now;
+
+    // ensure countdown only runs after the start date (which is today)
+    if (now < startDate) {
+        // not started yet – nothing to show
+        diff = 0;
+    }
 
     if (diff > 0) {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -10,12 +20,15 @@ function updateCountdown() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+        // update DOM elements with remaining time
+        // อัปเดตค่าหน่วยเวลาในหน้า
         document.getElementById('days').textContent = days;
         document.getElementById('hours').textContent = hours;
         document.getElementById('minutes').textContent = minutes;
         document.getElementById('seconds').textContent = seconds;
     } else {
         // It's Valentine's Day or after
+        // ถึงหรือผ่านวันเป้าหมายแล้ว ให้รีเซ็ตเป็น 0
         document.getElementById('days').textContent = '0';
         document.getElementById('hours').textContent = '0';
         document.getElementById('minutes').textContent = '0';
@@ -23,9 +36,25 @@ function updateCountdown() {
     }
 }
 
+// Show the starting date underneath the counter (in Thai locale)
+const startTextEl = document.getElementById('startDateText');
+if (startTextEl) {
+    startTextEl.textContent = 'เริ่มวันที่ ' + startDate.toLocaleDateString('th-TH');
+}
+
 // Update countdown every second
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+// for debugging, log diff each tick
+// (comment out or remove in production if unwanted)
+function debugCountdown() {
+    const now = new Date();
+    const targetDate = new Date('2026-11-02T00:00:00');
+    console.log('Countdown:', targetDate - now);
+}
+// Uncomment if you want console logs:
+// setInterval(debugCountdown, 1000);
 
 const surpriseBtn = document.getElementById('surpriseBtn');
 const surpriseMessage = document.getElementById('surpriseMessage');
